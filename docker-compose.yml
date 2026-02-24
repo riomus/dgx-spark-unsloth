@@ -1,0 +1,28 @@
+services:
+  unsloth:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: dgx-spark-unsloth:latest
+    ports:
+      - "8888:8888"
+    volumes:
+      - ./unsloth_finetuning.ipynb:/workspace/unsloth_finetuning.ipynb
+      - ./model:/workspace/model
+      - ./outputs:/workspace/outputs
+      - ./wandb:/workspace/wandb
+    ulimits:
+      memlock: -1
+      stack: 67108864
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    environment:
+      - JUPYTER_PASSWORD=${JUPYTER_PASSWORD:-}
+      - WANDB_API_KEY=${WANDB_API_KEY:-}
+    stdin_open: true
+    tty: true
