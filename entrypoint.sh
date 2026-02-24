@@ -11,6 +11,9 @@ c.ServerApp.password = '${HASHED_PASSWORD}'
 c.ServerApp.token = ''
 EOF
     echo "Jupyter Lab starting with password authentication."
+elif [ -n "$JUPYTER_TOKEN" ]; then
+    JUPYTER_ARGS="$JUPYTER_ARGS --ServerApp.token='$JUPYTER_TOKEN' --ServerApp.password=''"
+    echo "Jupyter Lab starting with token authentication."
 else
     JUPYTER_ARGS="$JUPYTER_ARGS --ServerApp.token='' --ServerApp.password=''"
     echo "WARNING: Jupyter Lab starting with no authentication."

@@ -23,7 +23,8 @@
 
 | Variable | Description |
 |---|---|
-| `JUPYTER_PASSWORD` | Password for Jupyter Lab. If unset, no authentication. |
+| `JUPYTER_PASSWORD` | Password for Jupyter Lab. Takes priority over token. |
+| `JUPYTER_TOKEN` | Token for Jupyter Lab. Used if password is not set. |
 | `WANDB_API_KEY` | Weights & Biases API key (optional). |
 
 ### Useful commands
